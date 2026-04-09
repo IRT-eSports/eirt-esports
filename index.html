@@ -3,344 +3,802 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>eIRT — Ittihad Tanger eSports · Section officielle</title>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<title>eIRT — Ittihad Riadhi de Tanger · Section eSports officielle</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@300;400;500;600;700;800;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
 <style>
   :root {
     --irt-blue: #002EE4;
     --irt-blue-2: #0038FF;
+    --irt-blue-dark: #001A8A;
     --irt-marine: #0F1223;
     --irt-gold: #C9A02C;
     --irt-yellow: #F9D84B;
     --irt-mint: #A8E6D8;
     --irt-white: #FFFFFF;
-    --irt-grey: #E5E7EB;
+    --irt-grey: #F4F5F8;
+    --irt-grey-2: #E5E7EB;
+    --irt-text: #0F1223;
+    --irt-muted: #6b7280;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
   body {
     font-family: 'Montserrat', sans-serif;
-    background: #0a0d1f;
-    color: #e7e9f4;
+    background: #ffffff;
+    color: var(--irt-text);
     line-height: 1.55;
     -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
   }
-  .font-display { font-family: 'Anton', sans-serif; letter-spacing: 0.02em; text-transform: uppercase; }
+  img { max-width: 100%; display: block; }
   .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
 
-  /* NAV */
-  nav {
-    position: sticky; top: 0; z-index: 50;
-    background: rgba(10, 13, 31, 0.9);
-    backdrop-filter: blur(14px);
-    border-bottom: 1px solid rgba(255,255,255,0.06);
+  /* ========== NAV ========== */
+  nav.top {
+    background: var(--irt-blue);
+    position: sticky; top: 0; z-index: 100;
+    box-shadow: 0 4px 20px rgba(0,46,228,0.25);
   }
-  .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 14px 24px; max-width:1280px; margin:0 auto; }
-  .brand { display:flex; align-items:center; gap:12px; }
-  .brand-mark {
-    width: 44px; height: 44px; border-radius: 10px;
-    background: linear-gradient(135deg, var(--irt-blue), var(--irt-blue-2));
-    display:flex; align-items:center; justify-content:center;
-    font-family:'Anton', sans-serif; font-size: 20px; color:#fff;
-    box-shadow: 0 6px 24px rgba(0,46,228,0.4);
+  .nav-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 24px; max-width: 1440px; margin: 0 auto; gap: 32px;
   }
-  .brand-text { line-height: 1.1; }
-  .brand-text .top { font-family:'Anton', sans-serif; font-size: 22px; color: #fff; letter-spacing: 0.05em; }
-  .brand-text .bot { font-size: 10px; color: var(--irt-gold); letter-spacing: 0.25em; text-transform: uppercase; }
-  .nav-links { display:flex; gap:28px; }
+  .brand-logo { display: flex; align-items: center; gap: 14px; text-decoration: none; }
+  .brand-logo svg { width: 48px; height: 54px; flex-shrink: 0; }
+  .brand-logo .bt {
+    font-family: 'Anton', sans-serif;
+    font-size: 24px; color: #fff; letter-spacing: 0.04em; line-height: 1;
+    text-transform: uppercase;
+  }
+  .brand-logo .bs {
+    font-size: 9px; color: var(--irt-yellow);
+    letter-spacing: 0.28em; text-transform: uppercase;
+    font-weight: 700; margin-top: 3px;
+  }
+  .nav-links {
+    display: flex; align-items: center; gap: 4px;
+    flex: 1; justify-content: center;
+  }
   .nav-links a {
-    color: #c8ccdd; text-decoration: none; font-size: 13px; font-weight: 600;
-    text-transform: uppercase; letter-spacing: 0.08em;
-    transition: color .2s;
+    color: #fff; text-decoration: none;
+    font-size: 12px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    padding: 10px 14px; border-radius: 6px;
+    transition: background .2s;
+    white-space: nowrap;
   }
-  .nav-links a:hover { color: var(--irt-yellow); }
-  @media (max-width: 760px) { .nav-links { display:none; } }
+  .nav-links a:hover, .nav-links a.active { background: rgba(255,255,255,0.14); }
+  .nav-links a.active { color: var(--irt-yellow); }
+  .nav-cta {
+    background: var(--irt-yellow); color: var(--irt-blue);
+    padding: 10px 18px; border-radius: 999px;
+    font-size: 11px; font-weight: 800; text-transform: uppercase;
+    letter-spacing: 0.12em; text-decoration: none;
+    transition: transform .2s;
+    white-space: nowrap;
+  }
+  .nav-cta:hover { transform: translateY(-1px); }
+  @media (max-width: 1100px) { .nav-links { display: none; } }
 
-  /* HERO */
+  /* ========== HERO ========== */
   .hero {
-    position: relative; overflow: hidden;
-    padding: 80px 24px 100px;
+    position: relative;
+    min-height: 680px;
+    display: flex; align-items: center;
+    overflow: hidden;
+    color: #fff;
     background:
-      radial-gradient(circle at 20% 10%, rgba(0,46,228,0.25), transparent 60%),
-      radial-gradient(circle at 80% 80%, rgba(201,160,44,0.12), transparent 60%),
-      linear-gradient(180deg, #0a0d1f 0%, #0f1223 100%);
+      linear-gradient(180deg, rgba(0,20,80,0.55) 0%, rgba(0,30,120,0.75) 60%, rgba(0,46,228,0.9) 100%),
+      radial-gradient(ellipse at 50% 40%, #1e3a8a 0%, #0c1238 70%);
   }
   .hero::before {
     content: ""; position: absolute; inset: 0;
     background-image:
-      linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-    background-size: 60px 60px;
-    mask-image: radial-gradient(ellipse at center, black 40%, transparent 85%);
+      radial-gradient(circle at 15% 20%, rgba(255,255,255,0.12) 0, transparent 2px),
+      radial-gradient(circle at 85% 25%, rgba(255,255,255,0.1) 0, transparent 2px),
+      radial-gradient(circle at 50% 10%, rgba(255,255,255,0.15) 0, transparent 3px),
+      radial-gradient(circle at 25% 60%, rgba(255,255,255,0.08) 0, transparent 2px),
+      radial-gradient(circle at 75% 70%, rgba(255,255,255,0.1) 0, transparent 2px);
+    background-size: 200px 200px, 300px 300px, 250px 250px, 180px 180px, 220px 220px;
   }
-  .hero .container { position: relative; z-index: 1; }
-  .est {
-    display:inline-flex; align-items:center; gap:10px;
-    padding: 6px 14px;
-    border: 1px solid rgba(201,160,44,0.5);
+  .hero::after {
+    content: "";
+    position: absolute; left: 0; right: 0; bottom: -1px;
+    height: 50px;
+    background: white;
+    clip-path: polygon(
+      0% 100%, 0% 40%, 3% 55%, 6% 35%, 9% 60%, 13% 30%, 17% 65%, 21% 40%,
+      25% 70%, 29% 35%, 33% 60%, 37% 30%, 41% 65%, 45% 40%, 49% 70%,
+      53% 35%, 57% 60%, 61% 30%, 65% 65%, 69% 40%, 73% 70%, 77% 35%,
+      81% 60%, 85% 30%, 89% 65%, 93% 40%, 97% 70%, 100% 50%, 100% 100%
+    );
+  }
+  .hero-inner { position: relative; z-index: 2; padding: 80px 0 120px; width: 100%; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 8px 18px;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.25);
     border-radius: 999px;
-    color: var(--irt-gold);
-    font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; font-weight: 700;
-    margin-bottom: 28px;
+    font-size: 11px; letter-spacing: 0.25em;
+    text-transform: uppercase; font-weight: 700;
+    color: var(--irt-yellow);
+    margin-bottom: 30px;
   }
-  .est .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--irt-gold); }
-  h1.mega {
+  .hero-badge .dot { width: 8px; height: 8px; background: var(--irt-yellow); border-radius: 50%; box-shadow: 0 0 12px var(--irt-yellow); }
+
+  h1.hero-title {
+    font-family: 'Caveat', cursive;
+    font-size: clamp(56px, 10vw, 138px);
+    line-height: 0.9;
+    color: var(--irt-yellow);
+    font-weight: 700;
+    text-shadow: 0 4px 30px rgba(0,0,0,0.4);
+    transform: rotate(-2deg);
+    margin-left: -10px;
+  }
+  .hero-sub {
     font-family: 'Anton', sans-serif;
-    font-size: clamp(52px, 9vw, 128px);
-    line-height: 0.92;
+    font-size: clamp(32px, 5.5vw, 78px);
+    line-height: 0.95;
     color: #fff;
     text-transform: uppercase;
     letter-spacing: 0.01em;
+    margin-top: 10px;
+    max-width: 900px;
   }
-  h1.mega .line2 { color: var(--irt-blue-2); }
-  h1.mega .esports {
-    display: inline-block;
-    background: var(--irt-blue);
-    color: #fff;
-    padding: 4px 20px 0;
-    margin-top: 8px;
+  .hero-sub span { color: var(--irt-yellow); }
+  .hero-desc {
+    margin-top: 28px; font-size: 17px;
+    max-width: 600px; color: rgba(255,255,255,0.9);
   }
-  .slogan {
-    margin-top: 28px; font-size: 18px; color: #c8ccdd; max-width: 680px;
-    font-weight: 400;
+  .hero-desc strong { color: var(--irt-yellow); font-weight: 800; }
+  .hero-actions { display: flex; gap: 14px; margin-top: 36px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 16px 28px; border-radius: 999px;
+    font-size: 12px; font-weight: 800; text-transform: uppercase;
+    letter-spacing: 0.15em; text-decoration: none;
+    transition: transform .2s, box-shadow .2s;
+    cursor: pointer; border: none;
   }
-  .slogan strong { color: var(--irt-yellow); font-weight: 700; font-style: italic; }
+  .btn-primary { background: var(--irt-yellow); color: var(--irt-blue); }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(249,216,75,0.4); }
+  .btn-ghost { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,0.4); }
+  .btn-ghost:hover { background: rgba(255,255,255,0.1); border-color: #fff; }
 
+  /* ========== KPI STRIP ========== */
+  .kpi-strip {
+    background: var(--irt-grey);
+    padding: 50px 0;
+    border-bottom: 1px solid var(--irt-grey-2);
+  }
   .kpi-row {
-    display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
-    margin-top: 56px;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px;
+    text-align: center;
   }
   @media (max-width: 760px) { .kpi-row { grid-template-columns: repeat(2, 1fr); } }
-  .kpi {
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 16px; padding: 22px;
+  .kpi .n {
+    font-family: 'Anton', sans-serif;
+    font-size: 64px; line-height: 1;
+    color: var(--irt-blue);
   }
-  .kpi .n { font-family: 'Anton', sans-serif; font-size: 52px; line-height: 1; color: #fff; }
   .kpi .n span { color: var(--irt-gold); }
-  .kpi .l { margin-top: 8px; font-size: 11px; color: #a3a8c2; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 600; }
-
-  /* VALUES */
-  .values {
-    border-top: 1px solid rgba(255,255,255,0.06);
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-    padding: 28px 0; background: #090c1c;
+  .kpi .l {
+    margin-top: 6px; font-size: 11px;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--irt-muted); font-weight: 700;
   }
-  .values-inner { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; text-align: center; }
-  @media (max-width: 760px) { .values-inner { grid-template-columns: repeat(2, 1fr); } }
-  .value { }
-  .value .k { font-family: 'Anton', sans-serif; font-size: 24px; color: var(--irt-yellow); letter-spacing: 0.08em; }
-  .value .v { font-size: 12px; color: #a3a8c2; margin-top: 4px; text-transform: uppercase; letter-spacing: 0.12em; }
 
-  /* SECTION */
-  section.block { padding: 96px 0; }
+  /* ========== MAS QUE FUTBOL SECTION ========== */
+  .masque {
+    background: #fff;
+    padding: 120px 0 100px;
+  }
+  .masque-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+    align-items: center;
+  }
+  @media (max-width: 960px) { .masque-grid { grid-template-columns: 1fr; gap: 40px; } }
+  .masque-label {
+    font-size: 12px; letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--irt-gold); font-weight: 800; margin-bottom: 18px;
+  }
+  .masque h2 .s1 {
+    font-family: 'Caveat', cursive;
+    font-size: clamp(54px, 8vw, 110px);
+    color: var(--irt-blue);
+    display: block; line-height: 0.9;
+    transform: rotate(-3deg);
+    margin-left: -5px;
+  }
+  .masque h2 .s2 {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(48px, 7vw, 92px);
+    color: var(--irt-blue-dark);
+    display: block; line-height: 0.95;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+  .masque p {
+    margin-top: 22px; font-size: 15.5px; color: #374151;
+    max-width: 560px;
+  }
+  .masque p strong { color: var(--irt-blue); font-weight: 800; }
+  .masque-collage {
+    position: relative;
+    min-height: 520px;
+  }
+  .collage-tile {
+    position: absolute;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0,20,80,0.2);
+    border: 4px solid #fff;
+  }
+  .collage-tile.t1 {
+    top: 0; left: 5%; width: 55%; height: 300px;
+    background:
+      linear-gradient(135deg, rgba(0,46,228,0.4), rgba(0,20,80,0.7)),
+      repeating-linear-gradient(45deg, #1e3a8a 0 20px, #1e40af 20px 40px);
+    transform: rotate(-3deg);
+    display: flex; align-items: flex-end; justify-content: flex-start;
+    padding: 20px;
+  }
+  .collage-tile.t1::after {
+    content: "TANJA · MEDINA";
+    font-family: 'Anton', sans-serif;
+    font-size: 24px; color: #fff;
+    letter-spacing: 0.15em;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.4);
+  }
+  .collage-tile.t2 {
+    top: 100px; right: 0; width: 48%; height: 280px;
+    background: linear-gradient(135deg, #C9A02C, #F9D84B);
+    transform: rotate(4deg);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .collage-tile.t2::after {
+    content: "1957";
+    font-family: 'Anton', sans-serif;
+    font-size: 120px; color: rgba(255,255,255,0.6);
+    letter-spacing: 0.05em;
+  }
+  .collage-tile.t3 {
+    bottom: 0; left: 15%; width: 60%; height: 240px;
+    background: linear-gradient(135deg, var(--irt-blue), var(--irt-blue-dark));
+    transform: rotate(-2deg);
+    display: flex; align-items: center; justify-content: center;
+    color: #fff;
+    text-align: center; padding: 20px;
+  }
+  .collage-tile.t3 .big {
+    font-family: 'Anton', sans-serif; font-size: 48px;
+    text-transform: uppercase; letter-spacing: 0.03em;
+    line-height: 1;
+  }
+  .collage-tile.t3 .small {
+    font-family: 'Caveat', cursive;
+    font-size: 26px;
+    color: var(--irt-yellow);
+    margin-top: 6px;
+  }
+
+  /* ========== VALUES STRIP ========== */
+  .values-strip {
+    background: var(--irt-grey);
+    padding: 50px 0;
+  }
+  .values-inner { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; text-align: center; }
+  @media (max-width: 760px) { .values-inner { grid-template-columns: repeat(2, 1fr); } }
+  .value .k {
+    font-family: 'Anton', sans-serif;
+    font-size: 28px; color: var(--irt-blue);
+    letter-spacing: 0.06em;
+  }
+  .value .v {
+    font-size: 12px; color: var(--irt-muted);
+    margin-top: 6px; text-transform: uppercase;
+    letter-spacing: 0.15em; font-weight: 700;
+  }
+
+  /* ========== TEAMS SECTION ========== */
+  .teams-section {
+    background: #fff; padding: 110px 0;
+  }
+  .section-head { text-align: center; margin-bottom: 20px; }
   .eyebrow {
     display: inline-block;
-    padding: 4px 12px; border: 1px solid rgba(201,160,44,0.5);
-    color: var(--irt-gold); font-size: 11px; letter-spacing: 0.25em;
-    text-transform: uppercase; font-weight: 700; border-radius: 999px;
-    margin-bottom: 14px;
+    padding: 6px 16px;
+    background: rgba(0,46,228,0.08);
+    color: var(--irt-blue);
+    font-size: 11px; letter-spacing: 0.25em;
+    text-transform: uppercase; font-weight: 800;
+    border-radius: 999px; margin-bottom: 16px;
   }
-  h2.h {
+  h2.section-title {
     font-family: 'Anton', sans-serif;
-    font-size: clamp(38px, 6vw, 72px);
-    line-height: 0.95; color: #fff; text-transform: uppercase;
+    font-size: clamp(40px, 6vw, 72px);
+    color: var(--irt-blue-dark);
+    text-transform: uppercase;
+    line-height: 0.95;
   }
-  h2.h .accent { color: var(--irt-blue-2); }
-  .sub {
-    margin-top: 14px; max-width: 720px; color: #b8bcd4; font-size: 15px;
+  h2.section-title .hl { color: var(--irt-blue); }
+  .section-sub {
+    margin: 16px auto 0; max-width: 640px;
+    color: var(--irt-muted); font-size: 15px;
   }
 
-  /* TEAMS FILTER */
-  .filter-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 32px; }
+  .filter-row {
+    display: flex; flex-wrap: wrap; gap: 10px;
+    justify-content: center; margin-top: 40px;
+  }
   .filter-btn {
     cursor: pointer;
-    background: transparent;
-    border: 1px solid rgba(255,255,255,0.12);
-    color: #c8ccdd;
-    padding: 10px 18px;
+    background: #fff;
+    border: 2px solid var(--irt-grey-2);
+    color: var(--irt-text);
+    padding: 11px 22px;
     border-radius: 999px;
     font-family: 'Montserrat', sans-serif;
-    font-weight: 700;
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
+    font-weight: 800; font-size: 11px;
+    text-transform: uppercase; letter-spacing: 0.1em;
     transition: all .2s;
   }
-  .filter-btn:hover { border-color: var(--irt-gold); color: var(--irt-gold); }
+  .filter-btn:hover { border-color: var(--irt-blue); color: var(--irt-blue); }
   .filter-btn.active {
     background: var(--irt-blue); border-color: var(--irt-blue); color: #fff;
-    box-shadow: 0 8px 24px rgba(0,46,228,0.4);
+    box-shadow: 0 10px 25px rgba(0,46,228,0.3);
   }
   .filter-btn .count {
     display: inline-block;
-    background: rgba(255,255,255,0.2); color: #fff;
+    background: rgba(0,0,0,0.08); color: inherit;
     padding: 2px 8px; border-radius: 999px;
     margin-left: 8px; font-size: 10px;
   }
+  .filter-btn.active .count { background: rgba(255,255,255,0.2); }
 
-  /* TEAM CARDS */
-  .teams-grid { margin-top: 40px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .teams-grid { margin-top: 50px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
   @media (max-width: 960px) { .teams-grid { grid-template-columns: 1fr; } }
-  .team {
-    background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 22px; padding: 28px;
-    transition: transform .25s ease, border-color .25s ease;
-  }
-  .team:hover { transform: translateY(-4px); border-color: var(--irt-gold); }
-  .team .head { display:flex; align-items: flex-start; justify-content: space-between; margin-bottom: 16px; }
-  .team .tag { font-family:'Anton', sans-serif; font-size: 32px; color: #fff; letter-spacing: 0.04em; }
-  .team .tag small { display:block; font-family: 'Montserrat', sans-serif; font-size: 11px; color: var(--irt-gold); letter-spacing: 0.18em; font-weight: 700; text-transform: uppercase; margin-top: 2px; }
-  .pill { display: inline-block; padding: 4px 10px; border-radius: 999px; font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
-  .pill.active { background: rgba(168,230,216,0.15); color: var(--irt-mint); border: 1px solid rgba(168,230,216,0.3); }
-  .pill.planned { background: rgba(255,255,255,0.04); color: #a3a8c2; border: 1px solid rgba(255,255,255,0.12); }
-
-  .roster { margin-top: 18px; }
-  .roster h4 { font-size: 11px; letter-spacing: 0.18em; color: #a3a8c2; text-transform: uppercase; margin-bottom: 10px; font-weight: 700; }
-  .player {
-    display: flex; align-items: center; gap: 14px;
-    padding: 12px 14px; border-radius: 12px;
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.05);
-    margin-bottom: 8px;
-    transition: background .2s, border-color .2s;
-    cursor: pointer;
-  }
-  .player:hover { background: rgba(0,46,228,0.15); border-color: var(--irt-blue); }
-  .avatar {
-    width: 42px; height: 42px; border-radius: 50%;
-    background: linear-gradient(135deg, var(--irt-blue), var(--irt-blue-2));
-    display:flex; align-items:center; justify-content:center;
-    font-family: 'Anton', sans-serif; font-size: 15px; color: #fff;
-    flex-shrink: 0;
-  }
-  .player .info { flex: 1; min-width: 0; }
-  .player .name { font-weight: 700; font-size: 14px; color: #fff; }
-  .player .role { font-size: 11px; color: #a3a8c2; text-transform: uppercase; letter-spacing: 0.08em; }
-  .player .gamer { font-size: 11px; color: var(--irt-yellow); font-weight: 700; }
-
-  .team .foot { margin-top: 18px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.06); display:flex; justify-content: space-between; font-size: 12px; color:#a3a8c2; }
-
-  /* PARTNERS */
-  .partners-grid { margin-top: 40px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-  @media (max-width: 960px) { .partners-grid { grid-template-columns: 1fr; } }
-  .partner {
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.08);
+  .team-card {
+    background: #fff;
+    border: 1px solid var(--irt-grey-2);
     border-radius: 20px;
-    padding: 26px;
-    transition: transform .2s;
+    overflow: hidden;
+    transition: transform .25s, box-shadow .25s, border-color .25s;
+    display: flex; flex-direction: column;
   }
-  .partner:hover { transform: translateY(-3px); border-color: var(--irt-gold); }
-  .partner .logo {
-    width: 64px; height: 64px; border-radius: 14px;
-    display:flex; align-items:center; justify-content:center;
-    font-family:'Anton', sans-serif; color:#fff;
-    margin-bottom: 16px;
+  .team-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 30px 60px rgba(0,20,80,0.12);
+    border-color: var(--irt-blue);
   }
-  .partner h3 { font-family: 'Anton', sans-serif; font-size: 26px; color: #fff; letter-spacing: 0.03em; text-transform: uppercase; }
-  .partner .type { font-size: 11px; color: var(--irt-gold); letter-spacing: 0.2em; text-transform: uppercase; font-weight: 700; margin-top: 4px; }
-  .partner p { color: #b8bcd4; font-size: 14px; margin-top: 12px; }
-
-  /* CTA */
-  .cta {
-    margin: 60px 0; padding: 60px 40px;
-    background: linear-gradient(135deg, var(--irt-blue) 0%, var(--irt-blue-2) 100%);
-    border-radius: 28px;
+  .team-head {
+    padding: 24px 26px;
+    background: linear-gradient(135deg, var(--irt-blue), var(--irt-blue-dark));
+    color: #fff;
+    display: flex; justify-content: space-between; align-items: flex-start;
     position: relative; overflow: hidden;
   }
-  .cta::before {
-    content: "1957"; position: absolute; right: -30px; bottom: -40px;
-    font-family: 'Anton', sans-serif;
-    font-size: 280px; color: rgba(255,255,255,0.06); line-height: 0.8;
+  .team-head::before {
+    content: ""; position: absolute; right: -40px; top: -40px;
+    width: 140px; height: 140px;
+    background: radial-gradient(circle, rgba(249,216,75,0.3), transparent 60%);
+    border-radius: 50%;
   }
-  .cta h3 { font-family: 'Anton', sans-serif; font-size: clamp(32px, 5vw, 56px); color: #fff; text-transform: uppercase; position: relative; }
-  .cta p { color: rgba(255,255,255,0.85); margin-top: 12px; max-width: 640px; position: relative; }
-  .cta .cta-tag { color: var(--irt-yellow); font-weight: 700; font-style: italic; }
+  .team-head .tag {
+    font-family: 'Anton', sans-serif;
+    font-size: 34px; letter-spacing: 0.04em;
+    position: relative;
+  }
+  .team-head .tag small {
+    display: block;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px; color: var(--irt-yellow);
+    letter-spacing: 0.2em; font-weight: 800;
+    text-transform: uppercase; margin-top: 2px;
+  }
+  .pill {
+    display: inline-block;
+    padding: 5px 12px; border-radius: 999px;
+    font-size: 9px; font-weight: 800;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    position: relative;
+  }
+  .pill.active { background: var(--irt-yellow); color: var(--irt-blue); }
+  .pill.planned { background: rgba(255,255,255,0.15); color: #fff; border: 1px solid rgba(255,255,255,0.3); }
 
-  /* FOOTER */
-  footer { background: #050716; padding: 60px 0 36px; border-top: 1px solid rgba(255,255,255,0.06); }
-  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 32px; }
-  @media (max-width: 760px) { .footer-grid { grid-template-columns: 1fr; } }
-  footer .t { font-family:'Anton', sans-serif; font-size: 14px; color: var(--irt-gold); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 12px; }
-  footer a { color: #a3a8c2; text-decoration: none; display: block; padding: 4px 0; font-size: 13px; }
+  .roster-box { padding: 24px 26px; flex: 1; }
+  .roster-box h4 {
+    font-size: 10px; letter-spacing: 0.2em;
+    color: var(--irt-muted); text-transform: uppercase;
+    margin-bottom: 14px; font-weight: 800;
+  }
+  .player {
+    display: flex; align-items: center; gap: 14px;
+    padding: 11px 12px; border-radius: 12px;
+    background: var(--irt-grey);
+    margin-bottom: 8px;
+    transition: background .2s;
+  }
+  .player:hover { background: rgba(0,46,228,0.08); }
+  .avatar {
+    width: 42px; height: 42px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Anton', sans-serif; font-size: 15px;
+    color: #fff; flex-shrink: 0;
+    background: linear-gradient(135deg, var(--irt-blue), var(--irt-blue-dark));
+  }
+  .player .info { flex: 1; min-width: 0; }
+  .player .name { font-weight: 800; font-size: 13px; color: var(--irt-text); }
+  .player .role { font-size: 10px; color: var(--irt-muted); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; margin-top: 2px; }
+  .player .gamer { font-size: 11px; color: var(--irt-gold); font-weight: 800; }
+
+  .team-foot {
+    padding: 16px 26px;
+    background: var(--irt-grey);
+    display: flex; justify-content: space-between;
+    font-size: 11px; color: var(--irt-muted);
+    text-transform: uppercase; letter-spacing: 0.08em;
+    font-weight: 700;
+    border-top: 1px solid var(--irt-grey-2);
+  }
+
+  /* ========== ROSTER FLAT LIST ========== */
+  .roster-section { background: var(--irt-grey); padding: 110px 0; }
+  .roster-grid { margin-top: 50px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  @media (max-width: 960px) { .roster-grid { grid-template-columns: 1fr; } }
+  .player-card {
+    background: #fff;
+    border: 1px solid var(--irt-grey-2);
+    border-radius: 18px;
+    padding: 26px;
+    transition: transform .2s, box-shadow .2s;
+  }
+  .player-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0,20,80,0.1);
+  }
+  .player-card .top-row { display: flex; gap: 18px; align-items: flex-start; }
+  .player-card .big-avatar {
+    width: 68px; height: 68px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--irt-blue), var(--irt-blue-dark));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Anton', sans-serif; font-size: 24px; color: #fff;
+    flex-shrink: 0;
+  }
+  .player-card .pname {
+    font-family: 'Anton', sans-serif;
+    font-size: 22px; color: var(--irt-text);
+    letter-spacing: 0.03em;
+    line-height: 1.1;
+  }
+  .player-card .ptag {
+    color: var(--irt-gold); font-weight: 800; font-size: 12px;
+    margin-top: 4px; font-style: italic;
+  }
+  .player-card .pcity {
+    color: var(--irt-muted); font-size: 12px;
+    margin-top: 4px;
+  }
+  .player-card .game-pills {
+    display: flex; flex-wrap: wrap; gap: 6px;
+    margin-top: 16px;
+  }
+  .game-pill {
+    padding: 5px 11px; border-radius: 999px;
+    font-size: 10px; font-weight: 800;
+    letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .player-card .roles {
+    margin-top: 14px; padding-top: 14px;
+    border-top: 1px solid var(--irt-grey-2);
+    font-size: 11px; color: var(--irt-muted);
+    line-height: 1.7;
+  }
+  .player-card .roles strong { color: var(--irt-text); }
+
+  /* ========== PARTNERS ========== */
+  .partners-section { background: #fff; padding: 100px 0; }
+  .partners-grid { margin-top: 50px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  @media (max-width: 960px) { .partners-grid { grid-template-columns: 1fr; } }
+  .partner {
+    background: #fff;
+    border: 2px solid var(--irt-grey-2);
+    border-radius: 20px;
+    padding: 32px;
+    transition: all .2s;
+  }
+  .partner:hover {
+    border-color: var(--irt-blue);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 45px rgba(0,20,80,0.1);
+  }
+  .partner .logo {
+    width: 72px; height: 72px; border-radius: 16px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Anton', sans-serif; font-size: 22px;
+    color: #fff; margin-bottom: 18px;
+    letter-spacing: 0.03em;
+  }
+  .partner h3 {
+    font-family: 'Anton', sans-serif;
+    font-size: 26px; color: var(--irt-text);
+    letter-spacing: 0.03em; text-transform: uppercase;
+  }
+  .partner .type {
+    font-size: 11px; color: var(--irt-gold);
+    letter-spacing: 0.2em; text-transform: uppercase;
+    font-weight: 800; margin-top: 4px;
+  }
+  .partner p { color: #4b5563; font-size: 14px; margin-top: 14px; }
+
+  /* ========== SPONSORS STRIP ========== */
+  .sponsors-strip {
+    background: var(--irt-grey);
+    padding: 40px 0;
+    border-top: 1px solid var(--irt-grey-2);
+    border-bottom: 1px solid var(--irt-grey-2);
+  }
+  .sponsors-inner {
+    display: flex; align-items: center; justify-content: space-around;
+    flex-wrap: wrap; gap: 30px;
+  }
+  .sponsor-logo {
+    font-family: 'Anton', sans-serif;
+    font-size: 22px;
+    color: #9ca3af;
+    opacity: 0.7;
+    transition: all .2s;
+    letter-spacing: 0.05em;
+  }
+  .sponsor-logo:hover { opacity: 1; color: var(--irt-blue); }
+
+  /* ========== BIG SIGNATURE SECTION ========== */
+  .signature-section {
+    background: var(--irt-blue);
+    padding: 140px 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .signature-section::before {
+    content: "";
+    position: absolute; left: 0; right: 0; top: -1px;
+    height: 50px;
+    background: white;
+    clip-path: polygon(
+      0% 0%, 100% 0%, 100% 100%,
+      97% 45%, 93% 75%, 89% 40%, 85% 70%, 81% 35%, 77% 65%,
+      73% 30%, 69% 70%, 65% 35%, 61% 65%, 57% 30%, 53% 70%,
+      49% 35%, 45% 65%, 41% 30%, 37% 70%, 33% 35%, 29% 65%,
+      25% 30%, 21% 70%, 17% 35%, 13% 65%, 9% 30%, 5% 70%, 0% 45%
+    );
+  }
+  .signature-section::after {
+    content: "";
+    position: absolute; left: 0; right: 0; bottom: -1px;
+    height: 50px;
+    background: white;
+    clip-path: polygon(
+      0% 100%, 0% 55%, 3% 45%, 7% 65%, 11% 35%, 15% 60%, 19% 30%,
+      23% 65%, 27% 40%, 31% 70%, 35% 35%, 39% 60%, 43% 30%,
+      47% 65%, 51% 40%, 55% 70%, 59% 35%, 63% 60%, 67% 30%,
+      71% 65%, 75% 40%, 79% 70%, 83% 35%, 87% 60%, 91% 30%,
+      95% 65%, 99% 40%, 100% 55%, 100% 100%
+    );
+  }
+  .signature-inner {
+    text-align: center;
+    position: relative; z-index: 2;
+  }
+  .signature-inner .big {
+    font-family: 'Caveat', cursive;
+    font-size: clamp(72px, 13vw, 170px);
+    color: var(--irt-yellow);
+    line-height: 0.85;
+    transform: rotate(-4deg);
+    display: inline-block;
+    text-shadow: 0 6px 0 rgba(0,0,0,0.12);
+  }
+  .signature-inner .sub {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(32px, 5vw, 64px);
+    color: #fff;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-top: 6px;
+  }
+  .signature-inner .tag {
+    display: inline-block;
+    margin-top: 26px;
+    padding: 10px 22px;
+    background: rgba(255,255,255,0.12);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 999px;
+    font-size: 11px; letter-spacing: 0.25em;
+    text-transform: uppercase; font-weight: 800;
+  }
+
+  /* ========== FOOTER ========== */
+  footer {
+    background: var(--irt-blue-dark);
+    color: #fff;
+    padding: 70px 0 30px;
+    position: relative;
+  }
+  footer::before {
+    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(90deg, var(--irt-yellow), var(--irt-gold), var(--irt-yellow));
+  }
+  .footer-grid {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px;
+  }
+  @media (max-width: 760px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+  .footer-brand { display: flex; flex-direction: column; gap: 18px; }
+  .footer-brand .shield { display: flex; align-items: center; gap: 14px; }
+  .footer-brand .shield svg { width: 56px; height: 62px; }
+  .footer-brand .shield .t {
+    font-family: 'Anton', sans-serif;
+    font-size: 26px; letter-spacing: 0.04em; line-height: 1;
+  }
+  .footer-brand .shield .s {
+    font-size: 10px; color: var(--irt-yellow);
+    letter-spacing: 0.25em; margin-top: 4px; font-weight: 800;
+  }
+  .footer-brand p { color: rgba(255,255,255,0.7); font-size: 13px; max-width: 360px; }
+  footer .t {
+    font-family: 'Anton', sans-serif;
+    font-size: 14px; color: var(--irt-yellow);
+    letter-spacing: 0.15em; text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  footer a {
+    color: rgba(255,255,255,0.75); text-decoration: none;
+    display: block; padding: 4px 0; font-size: 13px;
+    transition: color .15s;
+  }
   footer a:hover { color: var(--irt-yellow); }
   .where {
     margin-top: 40px; padding-top: 24px;
-    border-top: 1px solid rgba(255,255,255,0.06);
+    border-top: 1px solid rgba(255,255,255,0.12);
     text-align: center;
-    font-family: 'Anton', sans-serif;
-    font-size: 26px; letter-spacing: 0.08em;
-    color: var(--irt-mint);
+  }
+  .where .big {
+    font-family: 'Caveat', cursive;
+    font-size: 42px; color: var(--irt-yellow);
+    line-height: 1;
+  }
+  .where small {
+    display: block;
+    color: rgba(255,255,255,0.6); font-size: 11px;
+    letter-spacing: 0.3em; margin-top: 8px;
     text-transform: uppercase;
   }
-  .where small { display:block; font-family: 'Montserrat', sans-serif; color: #606680; font-size: 11px; letter-spacing: 0.3em; margin-top: 6px; }
-
-  .hidden { display: none !important; }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
+<!-- ========== NAV ========== -->
+<nav class="top">
   <div class="nav-inner">
-    <div class="brand">
-      <div class="brand-mark">IRT</div>
-      <div class="brand-text">
-        <div class="top">eIRT</div>
-        <div class="bot">Est. 1957</div>
+    <a href="#" class="brand-logo">
+      <svg viewBox="0 0 100 112" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50 2 L96 14 L96 58 C96 82 78 100 50 110 C22 100 4 82 4 58 L4 14 Z"
+              fill="#ffffff" stroke="#C9A02C" stroke-width="3"/>
+        <path d="M50 8 L90 18 L90 58 C90 78 74 94 50 104 C26 94 10 78 10 58 L10 18 Z"
+              fill="#002EE4"/>
+        <text x="50" y="55" font-family="Anton, sans-serif" font-size="32" font-weight="900"
+              fill="#ffffff" text-anchor="middle" letter-spacing="1">IRT</text>
+        <text x="50" y="78" font-family="Anton, sans-serif" font-size="14"
+              fill="#F9D84B" text-anchor="middle" letter-spacing="2">1957</text>
+        <circle cx="50" cy="88" r="2.5" fill="#F9D84B"/>
+        <circle cx="42" cy="90" r="1.8" fill="#F9D84B"/>
+        <circle cx="58" cy="90" r="1.8" fill="#F9D84B"/>
+      </svg>
+      <div>
+        <div class="bt">eIRT</div>
+        <div class="bs">Est. 1957</div>
       </div>
-    </div>
+    </a>
     <div class="nav-links">
+      <a href="#accueil" class="active">Accueil</a>
       <a href="#teams">Équipes</a>
       <a href="#roster">Roster</a>
       <a href="#partners">Partenaires</a>
+      <a href="#masque">Más Que Fútbol</a>
       <a href="#contact">Contact</a>
     </div>
+    <a href="#contact" class="nav-cta">E-Sport</a>
   </div>
 </nav>
 
-<!-- HERO -->
-<header class="hero">
-  <div class="container">
-    <div class="est"><span class="dot"></span>Ittihad Riadhi de Tanger · Est. 1957</div>
-    <h1 class="mega">
-      MÁS QUE FÚTBOL<br>
-      <span class="line2">UNA PASIÓN.</span><br>
-      <span class="esports">E-SPORTS</span>
-    </h1>
-    <p class="slogan">
-      Section eSports officielle de l’<strong>Ittihad Riadhi de Tanger</strong>, opérée en partenariat avec
-      Mustang Gaming. Nous faisons rayonner Tanja au-delà du stade — sur les ligues compétitives
-      du Maroc et de la région MENA.
+<!-- ========== HERO ========== -->
+<header class="hero" id="accueil">
+  <div class="container hero-inner">
+    <div class="hero-badge"><span class="dot"></span>Section officielle · IRT × Mustang Gaming</div>
+    <h1 class="hero-title">Une nouvelle ère</h1>
+    <div class="hero-sub">Pour l'IRT<br>et ses <span>supporters</span></div>
+    <p class="hero-desc">
+      L'<strong>Ittihad Riadhi de Tanger</strong> étend sa légende aux arènes digitales.
+      Trois titres compétitifs, onze joueurs professionnels, une ambition : faire briller
+      Tanja sur toutes les scènes eSports du Maroc et de la région MENA.
     </p>
-
-    <div class="kpi-row">
-      <div class="kpi"><div class="n" id="kGames">3</div><div class="l">Titres compétitifs</div></div>
-      <div class="kpi"><div class="n" id="kPlayers">11</div><div class="l">Joueurs sous contrat</div></div>
-      <div class="kpi"><div class="n" id="kContracts">14</div><div class="l">Contrats signés / à signer</div></div>
-      <div class="kpi"><div class="n">MENA<span>+</span></div><div class="l">Zone d’opération</div></div>
+    <div class="hero-actions">
+      <a href="#teams" class="btn btn-primary">Découvrir les équipes →</a>
+      <a href="#roster" class="btn btn-ghost">Voir le roster</a>
     </div>
   </div>
 </header>
 
-<!-- VALUES -->
-<div class="values">
+<!-- ========== KPI STRIP ========== -->
+<section class="kpi-strip">
+  <div class="container">
+    <div class="kpi-row">
+      <div class="kpi"><div class="n">3</div><div class="l">Titres compétitifs</div></div>
+      <div class="kpi"><div class="n" id="kPlayers">11</div><div class="l">Joueurs sous contrat</div></div>
+      <div class="kpi"><div class="n">14</div><div class="l">Contrats signés</div></div>
+      <div class="kpi"><div class="n">MENA<span>+</span></div><div class="l">Zone d'opération</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== MAS QUE FUTBOL ========== -->
+<section class="masque" id="masque">
+  <div class="container masque-grid">
+    <div>
+      <div class="masque-label">Notre Identité</div>
+      <h2>
+        <span class="s1">Más que fútbol,</span>
+        <span class="s2">Una pasión</span>
+      </h2>
+      <p>
+        Depuis <strong>1957</strong>, l'Ittihad Riadhi de Tanger représente bien plus qu'un club :
+        c'est une ville, une famille, une culture. Avec la création de notre section eSports officielle,
+        nous ouvrons un nouveau chapitre de cette histoire.
+      </p>
+      <p>
+        Opérée en partenariat exclusif avec <strong>Mustang Gaming</strong>, la division eIRT
+        porte les couleurs bleu et or de Tanja sur les plus grandes ligues compétitives —
+        eBotola MDJS, MPL MENA, Honor of Kings — avec le même engagement et la même passion
+        qui définissent notre club depuis près de 70 ans.
+      </p>
+    </div>
+    <div class="masque-collage">
+      <div class="collage-tile t1"></div>
+      <div class="collage-tile t2"></div>
+      <div class="collage-tile t3">
+        <div>
+          <div class="big">Tanja</div>
+          <div class="small">Where two seas touch the sky</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== VALUES STRIP ========== -->
+<div class="values-strip">
   <div class="container values-inner">
     <div class="value"><div class="k">PASSION</div><div class="v">Passion de Tanja</div></div>
-    <div class="value"><div class="k">COMMITMENT</div><div class="v">Envers les joueurs</div></div>
+    <div class="value"><div class="k">COMMITMENT</div><div class="v">Envers nos joueurs</div></div>
     <div class="value"><div class="k">IMPACT</div><div class="v">Au-delà du stade</div></div>
     <div class="value"><div class="k">SOLIDARITY</div><div class="v">Une famille, un club</div></div>
   </div>
 </div>
 
-<!-- TEAMS -->
-<section class="block" id="teams">
+<!-- ========== TEAMS ========== -->
+<section class="teams-section" id="teams">
   <div class="container">
-    <div class="eyebrow">La Section</div>
-    <h2 class="h">Nos équipes <span class="accent">compétitives.</span></h2>
-    <p class="sub">Trois titres actifs, un roster de 11 joueurs professionnels, et une ambition : représenter le drapeau IRT au plus haut niveau eSports régional.</p>
+    <div class="section-head">
+      <div class="eyebrow">La Section</div>
+      <h2 class="section-title">Nos équipes <span class="hl">compétitives</span></h2>
+      <p class="section-sub">
+        Trois titres actifs, un roster de 11 joueurs professionnels, et une ambition :
+        représenter le drapeau IRT au plus haut niveau eSports régional.
+      </p>
+    </div>
 
     <div class="filter-row">
       <button class="filter-btn active" data-filter="all">Tous <span class="count" id="cAll">0</span></button>
@@ -354,106 +812,140 @@
   </div>
 </section>
 
-<!-- ROSTER LIST (flat) -->
-<section class="block" id="roster" style="padding-top:0;">
+<!-- ========== ROSTER FLAT ========== -->
+<section class="roster-section" id="roster">
   <div class="container">
-    <div class="eyebrow">Roster officiel</div>
-    <h2 class="h">Les <span class="accent">joueurs.</span></h2>
-    <p class="sub">Cliquez sur un joueur pour voir ses équipes et son rôle. Certains joueurs portent les couleurs du club sur plusieurs titres.</p>
-    <div class="teams-grid" id="rosterGrid" style="grid-template-columns: repeat(3, 1fr);"></div>
+    <div class="section-head">
+      <div class="eyebrow">Roster officiel</div>
+      <h2 class="section-title">Les <span class="hl">joueurs</span></h2>
+      <p class="section-sub">
+        Certains joueurs portent les couleurs du club sur plusieurs titres.
+        Découvrez tous les membres de la section eIRT.
+      </p>
+    </div>
+    <div class="roster-grid" id="rosterGrid"></div>
   </div>
 </section>
 
-<!-- PARTNERS -->
-<section class="block" id="partners" style="padding-top:0;">
+<!-- ========== PARTNERS ========== -->
+<section class="partners-section" id="partners">
   <div class="container">
-    <div class="eyebrow">Partenaires stratégiques</div>
-    <h2 class="h">L’écosystème <span class="accent">eIRT.</span></h2>
+    <div class="section-head">
+      <div class="eyebrow">Partenaires stratégiques</div>
+      <h2 class="section-title">L'écosystème <span class="hl">eIRT</span></h2>
+    </div>
     <div class="partners-grid">
       <div class="partner">
-        <div class="logo" style="background:linear-gradient(135deg,#1d4ed8,#3b82f6);font-size:20px;">MG</div>
+        <div class="logo" style="background: linear-gradient(135deg, #1d4ed8, #3b82f6);">MG</div>
         <h3>Mustang Gaming</h3>
         <div class="type">Opérateur exclusif</div>
-        <p>Gaming Club Maroc S.A.R.L. — Partenaire opérationnel stratégique en charge de la gestion technique, de la haute performance et des primes des joueurs. Contrat cadre signé avec l’IRT.</p>
+        <p>Gaming Club Maroc S.A.R.L. — Partenaire opérationnel stratégique en charge de la gestion technique, de la haute performance et des primes des joueurs. Contrat cadre signé avec l'IRT.</p>
       </div>
       <div class="partner">
-        <div class="logo" style="background:linear-gradient(135deg,#c9a02c,#f9d84b);color:#0F1223;font-size:20px;">FR</div>
+        <div class="logo" style="background: linear-gradient(135deg, #C9A02C, #F9D84B); color: #0F1223;">FR</div>
         <h3>FRMJE</h3>
         <div class="type">Fédération Royale</div>
         <p>Fédération Royale Marocaine du Jeu Électronique — Cadre institutionnel national. Interlocuteur officiel pour les compétitions nationales et la représentation fédérale.</p>
       </div>
       <div class="partner">
-        <div class="logo" style="background:linear-gradient(135deg,#0F1223,#1f2937);font-size:18px;">eBo</div>
+        <div class="logo" style="background: linear-gradient(135deg, #0F1223, #1f2937);">eBo</div>
         <h3>eBotola MDJS</h3>
         <div class="type">Liga officielle</div>
-        <p>La ligue marocaine officielle d’eFootball, organisée avec la MDJS. Compétition flagship de la saison FC26, avec des ambitions podium pour l’équipe IRT.</p>
+        <p>La ligue marocaine officielle d'eFootball, organisée avec la MDJS. Compétition flagship de la saison FC26, avec des ambitions podium pour l'équipe IRT.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CTA -->
-<section class="container">
-  <div class="cta">
-    <h3>Where two seas touch the sky.</h3>
-    <p>Depuis 1957, l’<strong>Ittihad Riadhi de Tanger</strong> représente une ville, une famille, un club. La section eSports ouvre un nouveau chapitre de cette histoire — <span class="cta-tag">más que fútbol, una pasión</span>.</p>
+<!-- ========== SPONSORS STRIP ========== -->
+<div class="sponsors-strip">
+  <div class="container sponsors-inner">
+    <div class="sponsor-logo">MUSTANG</div>
+    <div class="sponsor-logo">FRMJE</div>
+    <div class="sponsor-logo">eBOTOLA</div>
+    <div class="sponsor-logo">MDJS</div>
+    <div class="sponsor-logo">TANGER MED</div>
+  </div>
+</div>
+
+<!-- ========== SIGNATURE ========== -->
+<section class="signature-section">
+  <div class="container signature-inner">
+    <div class="big">Más que fútbol,</div><br>
+    <div class="sub">una pasión.</div>
+    <div class="tag">Est. 1957 · Tanja · Maroc</div>
   </div>
 </section>
 
-<!-- FOOTER -->
+<!-- ========== FOOTER ========== -->
 <footer id="contact">
   <div class="container">
     <div class="footer-grid">
-      <div>
-        <div class="t">eIRT · Ittihad Tanger eSports</div>
-        <p style="color:#a3a8c2;font-size:13px;max-width:380px;">Section eSports officielle de l’Ittihad Riadhi de Tanger, opérée par Mustang Gaming. Tanja, Maroc.</p>
+      <div class="footer-brand">
+        <div class="shield">
+          <svg viewBox="0 0 100 112" xmlns="http://www.w3.org/2000/svg">
+            <path d="M50 2 L96 14 L96 58 C96 82 78 100 50 110 C22 100 4 82 4 58 L4 14 Z"
+                  fill="#ffffff" stroke="#F9D84B" stroke-width="3"/>
+            <path d="M50 8 L90 18 L90 58 C90 78 74 94 50 104 C26 94 10 78 10 58 L10 18 Z"
+                  fill="#002EE4"/>
+            <text x="50" y="55" font-family="Anton, sans-serif" font-size="32" font-weight="900"
+                  fill="#ffffff" text-anchor="middle">IRT</text>
+            <text x="50" y="78" font-family="Anton, sans-serif" font-size="14"
+                  fill="#F9D84B" text-anchor="middle" letter-spacing="2">1957</text>
+          </svg>
+          <div>
+            <div class="t">eIRT</div>
+            <div class="s">Ittihad Tanger eSports</div>
+          </div>
+        </div>
+        <p>
+          Section eSports officielle de l'Ittihad Riadhi de Tanger,
+          opérée en partenariat exclusif avec Mustang Gaming. Tanja, Maroc.
+        </p>
       </div>
       <div>
-        <div class="t">Navigation</div>
+        <div class="t">Section</div>
         <a href="#teams">Équipes</a>
         <a href="#roster">Roster</a>
         <a href="#partners">Partenaires</a>
       </div>
       <div>
-        <div class="t">Légal</div>
-        <a>Contrats joueurs</a>
-        <a>Charte Mustang</a>
+        <div class="t">Club</div>
+        <a href="https://irtfoot.ma" target="_blank">IRT Football</a>
+        <a>Histoire 1957</a>
         <a>Brand IRT</a>
+      </div>
+      <div>
+        <div class="t">Contact</div>
+        <a href="mailto:esports@irtfoot.ma">esports@irtfoot.ma</a>
+        <a>Mustang Gaming</a>
+        <a>FRMJE</a>
       </div>
     </div>
     <div class="where">
-      Where Two Seas Touch The Sky
+      <div class="big">Where two seas touch the sky</div>
       <small>Tanja · Est. 1957 · eIRT eSports Division</small>
     </div>
   </div>
 </footer>
 
 <script>
-// ========== DATA ==========
 const TEAMS = [
   {
-    id: "FC26",
-    code: "FC26",
-    name: "FC26 / eFootball",
-    status: "active",
-    statusLabel: "Compétitif",
-    color: "#38bdf8",
-    competition: "eBotola MDJS 2026",
-    operator: "Mustang Gaming",
+    id: "FC26", code: "FC26", name: "FC26 / eFootball",
+    status: "active", statusLabel: "Compétitif",
+    color: "#0284c7",
+    competition: "eBotola MDJS 2026", operator: "Mustang Gaming",
     roster: [
       { name: "Adnane Zekraoui", role: "Joueur titulaire", city: "Kénitra" },
       { name: "Ilyas El Haouas", role: "Joueur titulaire", city: "Tanger" },
     ]
   },
   {
-    id: "MLBB",
-    code: "MLBB",
-    name: "Mobile Legends: Bang Bang",
-    status: "active",
-    statusLabel: "MPL MENA",
-    color: "#a855f7",
-    competition: "MPL MENA 2026",
-    operator: "Mustang Gaming",
+    id: "MLBB", code: "MLBB", name: "Mobile Legends: Bang Bang",
+    status: "active", statusLabel: "MPL MENA",
+    color: "#7c3aed",
+    competition: "MPL MENA 2026", operator: "Mustang Gaming",
     roster: [
       { name: "Abderrahmane Boutahri", role: "Player", city: "Salé" },
       { name: "Achraf Oumraït", role: "Player", city: "Tanger", tag: "SpwN" },
@@ -465,14 +957,10 @@ const TEAMS = [
     ]
   },
   {
-    id: "HOK",
-    code: "HoK",
-    name: "Honor of Kings",
-    status: "active",
-    statusLabel: "Nouvelle section",
-    color: "#f59e0b",
-    competition: "Saison 2026",
-    operator: "Mustang Gaming",
+    id: "HOK", code: "HoK", name: "Honor of Kings",
+    status: "active", statusLabel: "Nouvelle section",
+    color: "#d97706",
+    competition: "Saison 2026", operator: "Mustang Gaming",
     roster: [
       { name: "Achraf Oumraït", role: "Team Leader · Mid Laner (Mage)", city: "Tanger", tag: "SpwN" },
       { name: "Aymane Nabil", role: "Clash Laner (Fighter)", city: "Nador", tag: "SAITO EREN" },
@@ -482,14 +970,10 @@ const TEAMS = [
     ]
   },
   {
-    id: "FUTURE",
-    code: "Futur",
-    name: "Extensions prévues",
-    status: "planned",
-    statusLabel: "À venir",
+    id: "FUTURE", code: "Futur", name: "Extensions prévues",
+    status: "planned", statusLabel: "À venir",
     color: "#64748b",
-    competition: "Évaluation 2026 / 2027",
-    operator: "À confirmer",
+    competition: "Évaluation 2026 / 2027", operator: "À confirmer",
     roster: [
       { name: "Valorant", role: "Scouting roster MENA", city: "—" },
       { name: "PUBG Mobile", role: "Scouting roster MENA", city: "—" },
@@ -498,28 +982,27 @@ const TEAMS = [
   }
 ];
 
-// ========== RENDER ==========
 const initials = n => n.split(/\s+/).slice(0,2).map(w => w[0] || "").join("").toUpperCase();
 
 function renderTeams(filter = "all") {
   const grid = document.getElementById("teamsGrid");
   grid.innerHTML = "";
-  const list = TEAMS.filter(t => filter === "all" ? t.status === "active" : t.id === filter);
-  // when "all": show only active (FC26, MLBB, HOK). When FUTURE: show planned.
-  const toShow = filter === "all" ? TEAMS.filter(t => t.status === "active") : TEAMS.filter(t => t.id === filter);
+  const toShow = filter === "all"
+    ? TEAMS.filter(t => t.status === "active")
+    : TEAMS.filter(t => t.id === filter);
   toShow.forEach(t => {
     const el = document.createElement("div");
-    el.className = "team";
+    el.className = "team-card";
     el.innerHTML = `
-      <div class="head">
+      <div class="team-head">
         <div class="tag">${t.code}<small>${t.name}</small></div>
         <span class="pill ${t.status}">${t.statusLabel}</span>
       </div>
-      <div class="roster">
+      <div class="roster-box">
         <h4>Roster · ${t.roster.length} ${t.status === "active" ? "joueurs" : "pistes"}</h4>
         ${t.roster.map(p => `
           <div class="player">
-            <div class="avatar" style="background:linear-gradient(135deg, ${t.color}, #002EE4)">${initials(p.name)}</div>
+            <div class="avatar">${initials(p.name)}</div>
             <div class="info">
               <div class="name">${p.name}${p.tag ? ` · <span class="gamer">"${p.tag}"</span>` : ""}</div>
               <div class="role">${p.role}</div>
@@ -527,7 +1010,7 @@ function renderTeams(filter = "all") {
           </div>
         `).join("")}
       </div>
-      <div class="foot">
+      <div class="team-foot">
         <span>${t.competition}</span>
         <span>${t.operator}</span>
       </div>
@@ -537,7 +1020,6 @@ function renderTeams(filter = "all") {
 }
 
 function renderRoster() {
-  // Flat unique roster: all players across teams, grouped by name
   const map = new Map();
   TEAMS.filter(t => t.status === "active").forEach(t => {
     t.roster.forEach(p => {
@@ -552,41 +1034,37 @@ function renderRoster() {
   grid.innerHTML = "";
   [...map.values()].sort((a,b) => a.name.localeCompare(b.name)).forEach(p => {
     const el = document.createElement("div");
-    el.className = "team";
+    el.className = "player-card";
     const tagsArr = [...p.tags];
     el.innerHTML = `
-      <div style="display:flex;gap:16px;align-items:flex-start;">
-        <div class="avatar" style="width:64px;height:64px;font-size:22px;background:linear-gradient(135deg,#0038FF,#002EE4)">${initials(p.name)}</div>
-        <div style="flex:1;">
-          <div style="font-family:'Anton',sans-serif;font-size:22px;color:#fff;letter-spacing:0.03em;">${p.name}</div>
-          ${tagsArr.length ? `<div style="color:#F9D84B;font-weight:700;font-size:12px;margin-top:2px;">"${tagsArr.join('" · "')}"</div>` : ""}
-          <div style="color:#a3a8c2;font-size:12px;margin-top:4px;">${p.city}</div>
+      <div class="top-row">
+        <div class="big-avatar">${initials(p.name)}</div>
+        <div>
+          <div class="pname">${p.name}</div>
+          ${tagsArr.length ? `<div class="ptag">"${tagsArr.join('" · "')}"</div>` : ""}
+          <div class="pcity">${p.city}</div>
         </div>
       </div>
-      <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:16px;">
-        ${p.games.map(g => `<span class="pill" style="background:${g.color}22;color:${g.color};border:1px solid ${g.color}55;">${g.code}</span>`).join("")}
+      <div class="game-pills">
+        ${p.games.map(g => `<span class="game-pill" style="background:${g.color}22;color:${g.color};border:1px solid ${g.color}55;">${g.code}</span>`).join("")}
       </div>
-      <div style="margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.06);font-size:12px;color:#b8bcd4;">
-        ${p.games.map(g => `<div>· ${g.code}: ${g.role}</div>`).join("")}
+      <div class="roles">
+        ${p.games.map(g => `<div><strong>${g.code}:</strong> ${g.role}</div>`).join("")}
       </div>
     `;
     grid.appendChild(el);
   });
 }
 
-// KPIs
 document.getElementById("cAll").textContent = TEAMS.filter(t => t.status === "active").reduce((a,t) => a + t.roster.length, 0);
 TEAMS.forEach(t => {
   const el = document.getElementById("c" + t.id);
   if (el) el.textContent = t.roster.length;
 });
-
-// Unique player count
 const uniq = new Set();
 TEAMS.filter(t => t.status === "active").forEach(t => t.roster.forEach(p => uniq.add(p.name.toLowerCase())));
 document.getElementById("kPlayers").textContent = uniq.size;
 
-// Filter
 document.querySelectorAll(".filter-btn").forEach(b => {
   b.addEventListener("click", () => {
     document.querySelectorAll(".filter-btn").forEach(x => x.classList.remove("active"));

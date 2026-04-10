@@ -1119,7 +1119,20 @@ renderRoster();
   </div>
 </section>
 
-<script>window.__EIRT_CALENDAR_CSV = "data:text/csv;base64,ZmVjaGEsaG9yYSxlcXVpcG9faXJ0LHJpdmFsLGNvbXBldGljaW9uLHRpcG8sbHVnYXIsbm90YXMKMjAyNi0wNC0xNSwxOTowMCxlSVJUIEZDMjYsUmFqYSBDYXNhYmxhbmNhIGVTcG9ydHMsTGlnYSBlTWFycm9xdWksUGFydGlkbyxPbmxpbmUsSm9ybmFkYSA1CjIwMjYtMDQtMTgsMjE6MDAsZUlSVCBGQzI2LFd5ZGFkIEFDIGVTcG9ydHMsTGlnYSBlTWFycm9xdWksUGFydGlkbyxPbmxpbmUsRGVyYmkKMjAyNi0wNC0yMiwxODozMCxlSVJULCxQcmVzZW50YXRpb24gbm91dmVhdXggam91ZXVycyxFdmVudG8sVGFuZ2VyLENsdWIgSG91c2UKMjAyNi0wNC0yNSwyMDowMCxlSVJUIEZDMjYsRkFSIFJhYmF0IGVTcG9ydHMsQ291cGUgZHUgVHJvbmUsUGFydGlkbyxSYWJhdCxIdWl0aWVtZXMgZGUgZmluYWxlCjIwMjYtMDUtMDIsMTc6MDAsZUlSVCwsVHJhaW5pbmcgQ2FtcCBtZW5zdWVsLEV2ZW50byxUYW5nZXIsU2llZ2UgZUlSVA==";</script>
+<script type="text/csv" id="eirt-cal-csv">
+fecha,hora,equipo_irt,rival,competicion,tipo,lugar,notas
+2026-04-15,19:00,eIRT FC26,Raja Casablanca eSports,Liga eMarroqui,Partido,Online,Jornada 5
+2026-04-18,21:00,eIRT FC26,Wydad AC eSports,Liga eMarroqui,Partido,Online,Derbi
+2026-04-22,18:30,eIRT,,Presentation nouveaux joueurs,Evento,Tanger,Club House
+2026-04-25,20:00,eIRT FC26,FAR Rabat eSports,Coupe du Trone,Partido,Rabat,Huitiemes de finale
+2026-05-02,17:00,eIRT,,Training Camp mensuel,Evento,Tanger,Siege eIRT
+</script>
+<script>
+(function(){
+  var el = document.getElementById("eirt-cal-csv");
+  if(el){ window.__EIRT_CALENDAR_CSV = URL.createObjectURL(new Blob([el.textContent],{type:"text/csv"})); }
+})();
+</script>
 /* ========= CALENDAR ========= */
 (function(){
   var CSV_URL = window.__EIRT_CALENDAR_CSV || "";

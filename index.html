@@ -1136,7 +1136,9 @@ fecha,hora,equipo_irt,rival,competicion,tipo,lugar,notas,resultado
 <script>
 /* ========= CALENDAR ========= */
 (function(){
-  var CSV_URL = window.__EIRT_CALENDAR_CSV || "";
+  var SHEET_CSV = "https://docs.google.com/spreadsheets/d/1l6tlf7T1f-G1wibk0BKjHntOmrxCiLzKz5j_kvqVfJs/pub?gid=0&single=true&output=csv";
+    var CSV_URL = SHEET_CSV;
+    var CSV_FALLBACK = window.__EIRT_CALENDAR_CSV || "";
   var MONTHS_FR = ["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre"];
   var MONTHS_SHORT = ["JAN","FÉV","MAR","AVR","MAI","JUIN","JUIL","AOÛ","SEP","OCT","NOV","DÉC"];
   var events = [];
@@ -1264,6 +1266,7 @@ fecha,hora,equipo_irt,rival,competicion,tipo,lugar,notas,resultado
       events = parseCSV(txt).map(function(e){ e._date = parseDate(e.fecha); return e; }).filter(function(e){ return e._date; });
       render();
     }).catch(function(err){
+        if(CSV_FALLBACK){ fetch(CSV_FALLBACK).then(function(r){return r.text();}).then(function(txt){ events=parseCSV(txt).map(function(e){e._date=parseDate(e.fecha);return e;}).filter(function(e){return e._date;}); render(); }); return; }
       document.getElementById('cal-days').innerHTML = '<div class="cal-empty" style="grid-column:span 7">Erreur de chargement.</div>';
       document.getElementById('cal-upcoming').innerHTML = '<div class="cal-empty">Impossible de charger le calendrier.</div>';
       renderGrid();

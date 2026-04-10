@@ -1119,7 +1119,7 @@ renderRoster();
   </div>
 </section>
 
-<script>window.__EIRT_CALENDAR_CSV = "data:text/csv;base64,ZmVjaGEsaG9yYSxlcXVpcG9faXJ0LHJpdmFsLGNvbXBldGljaW9uLHRpcG8sbHVnYXIsbm90YXNcbjIwMjYtMDQtMTUsMTk6MDAsZUlSVCBGQzI2LFJhamEgQ2FzYWJsYW5jYSBlU3BvcnRzLExpZ2EgZU1hcnJvcXVpLFBhcnRpZG8sT25saW5lLEpvcm5hZGEgNVxuMjAyNi0wNC0xOCwyMTowMCxlSVJUIEZDMjYsV3lkYWQgQUMgZVNwb3J0cyxMaWdhIGVNYXJyb3F1aSxQYXJ0aWRvLE9ubGluZSxEZXJiaVxuMjAyNi0wNC0yMiwxODozMCxlSVJULCxQcmVzZW50YXRpb24gbm91dmVhdXggam91ZXVycyxFdmVudG8sVGFuZ2VyLENsdWIgSG91c2VcbjIwMjYtMDQtMjUsMjA6MDAsZUlSVCBGQzI2LEZBUiBSYWJhdCBlU3BvcnRzLENvdXBlIGR1IFRyb25lLFBhcnRpZG8sUmFiYXQsSHVpdGllbWVzIGRlIGZpbmFsZVxuMjAyNi0wNS0wMiwxNzowMCxlSVJULCxUcmFpbmluZyBDYW1wIG1lbnN1ZWwsRXZlbnRvLFRhbmdlcixTaWVnZSBlSVJU";</script>
+<script>window.__EIRT_CALENDAR_CSV = "data:text/csv;base64,ZmVjaGEsaG9yYSxlcXVpcG9faXJ0LHJpdmFsLGNvbXBldGljaW9uLHRpcG8sbHVnYXIsbm90YXMKMjAyNi0wNC0xNSwxOTowMCxlSVJUIEZDMjYsUmFqYSBDYXNhYmxhbmNhIGVTcG9ydHMsTGlnYSBlTWFycm9xdWksUGFydGlkbyxPbmxpbmUsSm9ybmFkYSA1CjIwMjYtMDQtMTgsMjE6MDAsZUlSVCBGQzI2LFd5ZGFkIEFDIGVTcG9ydHMsTGlnYSBlTWFycm9xdWksUGFydGlkbyxPbmxpbmUsRGVyYmkKMjAyNi0wNC0yMiwxODozMCxlSVJULCxQcmVzZW50YXRpb24gbm91dmVhdXggam91ZXVycyxFdmVudG8sVGFuZ2VyLENsdWIgSG91c2UKMjAyNi0wNC0yNSwyMDowMCxlSVJUIEZDMjYsRkFSIFJhYmF0IGVTcG9ydHMsQ291cGUgZHUgVHJvbmUsUGFydGlkbyxSYWJhdCxIdWl0aWVtZXMgZGUgZmluYWxlCjIwMjYtMDUtMDIsMTc6MDAsZUlSVCwsVHJhaW5pbmcgQ2FtcCBtZW5zdWVsLEV2ZW50byxUYW5nZXIsU2llZ2UgZUlSVA==";</script>
 /* ========= CALENDAR ========= */
 (function(){
   var CSV_URL = window.__EIRT_CALENDAR_CSV || "";
@@ -1246,7 +1246,7 @@ renderRoster();
       renderGrid();
       return;
     }
-    fetch(CSV_URL, {cache: 'no-store'}).then(function(r){ return r.text(); }).then(function(txt){
+    fetch(CSV_URL).then(function(r){ return r.text(); }).then(function(txt){
       events = parseCSV(txt).map(function(e){ e._date = parseDate(e.fecha); return e; }).filter(function(e){ return e._date; });
       render();
     }).catch(function(err){

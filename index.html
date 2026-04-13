@@ -1210,7 +1210,7 @@ renderRoster();
 <section class="calendar-section" id="calendrier">
   <div class="container">
     <h2 class="section-title">CALENDRIER</h2>
-    <p class="section-sub">Prochains matchs et événements de la section eSports</p>
+    <p class="section-sub">Matchs et événements de la section eSports</p>
     <div class="calendar-wrap">
       <div class="cal-grid">
         <div class="cal-head">
@@ -1224,7 +1224,7 @@ renderRoster();
         <div class="cal-days" id="cal-days"><div class="cal-loading">Chargement…</div></div>
       </div>
       <div class="cal-list">
-        <h3>Prochains événements</h3>
+        <h3>Événements</h3>
         <div id="cal-upcoming"><div class="cal-loading">Chargement…</div></div>
       </div>
     </div>
@@ -1337,8 +1337,8 @@ fecha,hora,equipo_irt,rival,competicion,tipo,lugar,notas,resultado
     var container = document.getElementById('cal-upcoming');
     if (!container) return;
     var now = new Date(); now.setHours(0,0,0,0);
-    var upcoming = events.filter(function(e){ return e._date && e._date >= now; }).sort(function(a,b){ return a._date - b._date; }).slice(0, 12);
-    if (!upcoming.length){ container.innerHTML = '<div class="cal-empty">Aucun événement à venir pour le moment.</div>'; return; }
+    var upcoming = events.filter(function(e){ return e._date; }).sort(function(a,b){ return a._date - b._date; }).slice(0, 20);
+    if (!upcoming.length){ container.innerHTML = '<div class="cal-empty">Aucun événement pour le moment.</div>'; return; }
     container.innerHTML = '';
     upcoming.forEach(function(e){
       var d = e._date;

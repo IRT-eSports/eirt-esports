@@ -782,9 +782,10 @@
       <h2>eIRT eSports</h2>
       <p>Espace réservé aux membres</p>
       <form id="login-form" onsubmit="return handleLogin(event)">
-        <input type="password" id="login-pw" placeholder="Mot de passe" autocomplete="off" autofocus>
+        <input type="text" id="login-user" placeholder="Utilisateur" autocomplete="off" autofocus style="margin-bottom:10px">
+        <input type="password" id="login-pw" placeholder="Mot de passe" autocomplete="off">
         <button type="submit">Entrer</button>
-        <div class="login-error" id="login-err">Mot de passe incorrect</div>
+        <div class="login-error" id="login-err">Identifiants incorrects</div>
       </form>
     </div>
   </div>
@@ -1398,33 +1399,36 @@ fecha,hora,equipo_irt,rival,competicion,tipo,lugar,notas,resultado
 
   <script>
   // ---- LOGIN GATE ----
-  var PASS_HASH = '82a28a4b4ac33443d44ae7f22a9603a7ad3a05380a18ed3b7911da9895e1dff6';
-  
+  var USER_HASH = '322fd11945d8f99e6c0a9f22872d00bcc0e26d509e75ab5ae1b4397546a810c2';
+  var PASS_HASH = '2201c348c9d819c4d24b786b435977e502701b6eaf8a6b2e25cd5ce8d1b6d9f8';
+
   (function() {
     if (sessionStorage.getItem('eirt_auth') === 'ok') {
       document.getElementById('login-gate').classList.add('hidden');
     }
   })();
-  
-  async function hashPassword(pw) {
+
+  async function hashText(text) {
     var encoder = new TextEncoder();
-    var data = encoder.encode(pw);
+    var data = encoder.encode(text);
     var hashBuffer = await crypto.subtle.digest('SHA-256', data);
     var hashArray = Array.from(new Uint8Array(hashBuffer));
     return hashArray.map(function(b) { return b.toString(16).padStart(2, '0'); }).join('');
   }
-  
+
   async function handleLogin(e) {
     e.preventDefault();
+    var user = document.getElementById('login-user').value;
     var pw = document.getElementById('login-pw').value;
-    var hash = await hashPassword(pw);
-    if (hash === PASS_HASH) {
+    var userHash = await hashText(user);
+    var pwHash = await hashText(pw);
+    if (userHash === USER_HASH && pwHash === PASS_HASH) {
       sessionStorage.setItem('eirt_auth', 'ok');
       document.getElementById('login-gate').classList.add('hidden');
     } else {
       document.getElementById('login-err').style.display = 'block';
       document.getElementById('login-pw').value = '';
-      document.getElementById('login-pw').focus();
+      document.getElementById('login-user').focus();
     }
     return false;
   }

@@ -717,9 +717,53 @@
 .resultado.victoria { background: #10b981; }
 .cal-empty { text-align: center; color: var(--irt-muted); padding: 30px 10px; font-size: 14px; }
 .cal-loading { text-align: center; padding: 40px; color: var(--irt-muted); }
-</style>
+
+/* ---- LOGIN GATE ---- */
+#login-gate {
+  position: fixed; inset: 0; z-index: 99999;
+  background: linear-gradient(135deg, var(--irt-blue) 0%, var(--irt-marine) 100%);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Montserrat', sans-serif;
+}
+#login-gate.hidden { display: none; }
+.login-box {
+  background: #fff; border-radius: 18px; padding: 48px 38px; width: 90%; max-width: 380px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3); text-align: center;
+}
+.login-box img { width: 80px; margin-bottom: 18px; }
+.login-box h2 { font-family: 'Anton', sans-serif; color: var(--irt-marine); font-size: 22px; margin: 0 0 6px; letter-spacing: 0.02em; }
+.login-box p { color: var(--irt-muted); font-size: 13px; margin: 0 0 24px; }
+.login-box input {
+  width: 100%; padding: 12px 16px; border: 2px solid var(--irt-grey-2); border-radius: 10px;
+  font-size: 15px; font-family: 'Montserrat', sans-serif; outline: none;
+  box-sizing: border-box; transition: border-color 0.2s;
+}
+.login-box input:focus { border-color: var(--irt-blue); }
+.login-box button {
+  width: 100%; padding: 13px; margin-top: 14px; border: none; border-radius: 10px;
+  background: var(--irt-blue); color: #fff; font-weight: 800; font-size: 15px;
+  font-family: 'Montserrat', sans-serif; cursor: pointer; transition: background 0.2s;
+}
+.login-box button:hover { background: var(--irt-blue-dark); }
+.login-error { color: #ef4444; font-size: 12px; margin-top: 10px; display: none; }
+
+    </style>
 </head>
 <body>
+  <!-- LOGIN GATE -->
+  <div id="login-gate">
+    <div class="login-box">
+      <div style="font-size:56px;margin-bottom:8px">🛡️</div>
+      <h2>eIRT eSports</h2>
+      <p>Espace réservé aux membres</p>
+      <form id="login-form" onsubmit="return handleLogin(event)">
+        <input type="password" id="login-pw" placeholder="Mot de passe" autocomplete="off" autofocus>
+        <button type="submit">Entrer</button>
+        <div class="login-error" id="login-err">Mot de passe incorrect</div>
+      </form>
+    </div>
+  </div>
+
 
 <!-- ========== NAV ========== -->
 <nav class="top">
@@ -942,6 +986,12 @@
         <a>FRMJE</a>
       </div>
     </div>
+          <div style="margin-top:18px;display:flex;gap:12px;align-items:center">
+        <a href="https://www.instagram.com/irtesports/" target="_blank" rel="noopener" style="color:#fff;text-decoration:none;display:flex;align-items:center;gap:8px;font-size:14px;opacity:0.85;transition:opacity 0.2s" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85">
+          <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          @irtesports
+        </a>
+      </div>
     <div class="where">
       <div class="big">Where two seas touch the sky</div>
       <small>Tanja · Est. 1957 · eIRT eSports Division</small>
@@ -1287,5 +1337,40 @@ fecha,hora,equipo_irt,rival,competicion,tipo,lugar,notas,resultado
 })();
 </script>
 
-</body>
+
+  <script>
+  // ---- LOGIN GATE ----
+  var PASS_HASH = '82a28a4b4ac33443d44ae7f22a9603a7ad3a05380a18ed3b7911da9895e1dff6';
+  
+  (function() {
+    if (sessionStorage.getItem('eirt_auth') === 'ok') {
+      document.getElementById('login-gate').classList.add('hidden');
+    }
+  })();
+  
+  async function hashPassword(pw) {
+    var encoder = new TextEncoder();
+    var data = encoder.encode(pw);
+    var hashBuffer = await crypto.subtle.digest('SHA-256', data);
+    var hashArray = Array.from(new Uint8Array(hashBuffer));
+    return hashArray.map(function(b) { return b.toString(16).padStart(2, '0'); }).join('');
+  }
+  
+  async function handleLogin(e) {
+    e.preventDefault();
+    var pw = document.getElementById('login-pw').value;
+    var hash = await hashPassword(pw);
+    if (hash === PASS_HASH) {
+      sessionStorage.setItem('eirt_auth', 'ok');
+      document.getElementById('login-gate').classList.add('hidden');
+    } else {
+      document.getElementById('login-err').style.display = 'block';
+      document.getElementById('login-pw').value = '';
+      document.getElementById('login-pw').focus();
+    }
+    return false;
+  }
+  </script>
+
+  </body>
 </html>

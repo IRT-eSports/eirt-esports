@@ -1325,20 +1325,36 @@ fecha,hora,equipo_irt,rival,competicion,tipo,lugar,notas,resultado
         }
         el.appendChild(dots);
         el.title = c.events.map(function(e){ return (e.hora || '') + ' ' + (e.equipo_irt || '') + (e.rival ? ' vs ' + e.rival : ''); }).join('\n');
-        el.addEventListener('click', function(){
-          var target = document.getElementById('cal-upcoming');
-          if (target) target.scrollIntoView({behavior: 'smooth', block: 'center'});
-        });
+        el.addEventListener('click', (function(dayDate){
+          return function(){
+            renderList(dayDate);
+            var target = document.getElementById('cal-upcoming');
+            if (target) target.scrollIntoView({behavior: 'smooth', block: 'center'});
+          };
+        })(c.date));
       }
       container.appendChild(el);
     });
   }
-  function renderList(){
+  function renderList(filterDate){
     var container = document.getElementById('cal-upcoming');
     if (!container) return;
-    var now = new Date(); now.setHours(0,0,0,0);
-    var upcoming = events.filter(function(e){ return e._date; }).sort(function(a,b){ return a._date - b._date; }).slice(0, 20);
-    if (!upcoming.length){ container.innerHTML = '<div class="cal-empty">Aucun événement pour le moment.</div>'; return; }
+    var listTitle = container.parentElement.querySelector('h3');
+    var sorted = events.filter(function(e){ return e._date; }).sort(function(a,b){ return a._date - b._date; });
+    var upcoming;
+    if (filterDate) {
+      upcoming = sorted.filter(function(e){ return sameDay(e._date, filterDate); });
+      var dayStr = filterDate.getDate() + ' ' + MONTHS_FR[filterDate.getMonth()] + ' ' + filterDate.getFullYear();
+      if (listTitle) listTitle.innerHTML = 'Événements — ' + dayStr + ' <a href="#" id="cal-show-all" style="font-size:13px;color:var(--irt-blue);margin-left:10px;font-weight:600">Voir tous</a>';
+      setTimeout(function(){
+        var btn = document.getElementById('cal-show-all');
+        if (btn) btn.addEventListener('click', function(ev){ ev.preventDefault(); renderList(); });
+      }, 0);
+    } else {
+      upcoming = sorted.slice(0, 20);
+      if (listTitle) listTitle.textContent = 'Événements';
+    }
+    if (!upcoming.length){ container.innerHTML = '<div class="cal-empty">Aucun événement ce jour.</div>'; return; }
     container.innerHTML = '';
     upcoming.forEach(function(e){
       var d = e._date;
